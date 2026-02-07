@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Cozy Merge 2026&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--bg: #fdf6e3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--grid: #eee8d5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--text: #586e75;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0; background: var(--bg); font-family: 'Segoe UI', sans-serif;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex; flex-direction: column; align-items: center; justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100vh; overflow: hidden; touch-action: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#game-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative; width: 350px; height: 500px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--grid); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden; border: 8px solid white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute; width: 60px; height: 60px; border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex; align-items: center; justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 30px; cursor: grab; user-select: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.1s ease, box-shadow 0.1s ease;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 6px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.item:active { cursor: grabbing; transform: scale(1.1); z-index: 100; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#ui { margin-bottom: 20px; text-align: center; color: var(--text); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 24px; border: none; border-radius: 50px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #859900; color: white; font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px; cursor: pointer; transition: 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>button:active { transform: scale(0.95); opacity: 0.9; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="ui"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 id="score"&gt;Score: 0&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="spawnItem()"&gt;Spawn Item (Seed)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="game-container" id="board"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const board = document.getElementById('game-container');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const scoreEl = document.getElementById('score');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let score = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const levels = [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ emoji: '🌱', color: '#b58900' }, // Level 1</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ emoji: '🌿', color: '#859900' }, // Level 2</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ emoji: '🌻', color: '#b58900' }, // Level 3</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ emoji: '🌳', color: '#2aa198' }, // Level 4</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ emoji: '🍎', color: '#dc322f' }, // Level 5</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ emoji: '💎', color: '#6c71c4' }<span class="Apple-converted-space">  </span>// Level 6 (Max)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function spawnItem(level = 0, x, y) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const item = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>item.className = 'item';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>item.dataset.level = level;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>item.style.backgroundColor = levels[level].color;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>item.innerText = levels[level].emoji;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Random position if not specified</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const posX = x || Math.random() * (350 - 60);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const posY = y || Math.random() * (500 - 60);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>item.style.left = posX + 'px';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>item.style.top = posY + 'px';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>makeDraggable(item);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>board.appendChild(item);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function makeDraggable(el) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>el.onpointerdown = (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>pos3 = e.clientX;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>pos4 = e.clientY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>el.setPointerCapture(e.pointerId);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>el.onpointermove = (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pos1 = pos3 - e.clientX;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pos2 = pos4 - e.clientY;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pos3 = e.clientX;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pos4 = e.clientY;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>el.style.top = (el.offsetTop - pos2) + "px";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>el.style.left = (el.offsetLeft - pos1) + "px";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>el.onpointerup = (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>el.onpointermove = null;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>checkMerge(el);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function checkMerge(dragged) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rect1 = dragged.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const items = document.querySelectorAll('.item');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>items.forEach(target =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (target === dragged) return;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const rect2 = target.getBoundingClientRect();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Simple collision detection</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const isOverlapping = !(rect1.right &lt; rect2.left ||<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>rect1.left &gt; rect2.right ||<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>rect1.bottom &lt; rect2.top ||<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>rect1.top &gt; rect2.bottom);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (isOverlapping &amp;&amp; dragged.dataset.level === target.dataset.level) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const currentLevel = parseInt(dragged.dataset.level);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (currentLevel &lt; levels.length - 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const midX = target.offsetLeft;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const midY = target.offsetTop;</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>dragged.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>target.remove();</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>spawnItem(currentLevel + 1, midX, midY);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>score += (currentLevel + 1) * 10;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>scoreEl.innerText = `Score: ${score}`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Spawn a few to start</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for(let i=0; i&lt;3; i++) spawnItem();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
